@@ -21,7 +21,7 @@ services:
     build: ./api-server
     image: api_image
     container_name: api_1
-    command: bash -c "npm start"
+    command: bash -c "knex migrate:latest && knex seed:run && npm start"
     ports:
       - 8080:8080
     volumes:
