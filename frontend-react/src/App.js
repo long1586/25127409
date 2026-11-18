@@ -17,9 +17,10 @@ function Room(props) {
 }
 
 function App() {
-  const api = window.location.hostname.endsWith('.app.github.dev')
+  const defaultApi = window.location.hostname.endsWith('.app.github.dev')
     ? `${window.location.protocol}//${window.location.hostname.replace(/-3000(?=\.app\.github\.dev$)/, '-8080')}/room`
-    : `http://${window.location.hostname}:8080/room`;
+    : 'http://localhost:8080/room';
+  const api = process.env.REACT_APP_API_URL || defaultApi;
   const { data, error, isLoading } = useSWR(api, fetcher);
 
   if (error) return <div>failed to load</div>;

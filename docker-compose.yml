@@ -34,6 +34,8 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
   frontend:
+    depends_on:
+      - api
     build: ./frontend-react
     image: frontend_image
     container_name: frontend_1
@@ -42,3 +44,5 @@ services:
       - 3000:3000
     volumes:
       - ./frontend-react:/data/app
+    environment:
+      REACT_APP_API_URL: ${REACT_APP_API_URL:-}
